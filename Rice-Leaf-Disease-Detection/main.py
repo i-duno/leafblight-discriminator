@@ -7,7 +7,7 @@ from PIL import Image
 import tensorflow as tf
 import os
 
-MODEL_NAME = 'bacterial-leaf-blight-model-12022025'
+MODEL_NAME = 'bacterial-leaf-blight-model-12022025.keras'
 CLASS_NAMES = ['bacterial_leaf_blight', 'brown_spot', 'healthy', 'leaf_blast', 'leaf_scald', 'narrow_brown_spot']
 IMAGE_SIZE = (128, 128)
 
