@@ -3,7 +3,6 @@ const fileInput = document.getElementById('fileInput');
 const resultElement = document.getElementById('result');
 const uploadedImage = document.getElementById('uploadedImage');
 const predictionElement = document.getElementById('prediction');
-const suggestionLink = document.getElementById('suggestion-link');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -11,7 +10,6 @@ form.addEventListener('submit', async (event) => {
     const file = fileInput.files[0];
     if (!file) {
         predictionElement.textContent = "Please select an image first.";
-        suggestionLink.style.display = "none";
         return;
     }
 
@@ -35,25 +33,10 @@ form.addEventListener('submit', async (event) => {
             const result = await response.json();
             console.log(result)
             predictionElement.textContent = `Prediction: ${result.class}, Confidence: ${result.confidence.toFixed(2)}%`;
-
-            suggestionLink.textContent = "Know More";
-            suggestionLink.style.display = "inline-block";
-
-            if (result.class === "Healthy") {
-                suggestionLink.href = "https://cropaia.com/blog/guide-to-potato-cultivation/";
-            } else if (result.class === "Early Blight") {
-                suggestionLink.href = "https://www.cropscience.bayer.us/articles/cp/early-blight-potatoes";
-            } else if (result.class === "Late Blight") {
-                suggestionLink.href = "https://www.ndsu.edu/agriculture/extension/publications/late-blight-potato";
-            } else {
-                suggestionLink.style.display = "none";
-            }
         } else {
             predictionElement.textContent = "Error: Unable to get prediction.";
-            suggestionLink.style.display = "none";
         }
     } catch (error) {
         predictionElement.textContent = `Error: ${error.message}`;
-        suggestionLink.style.display = "none";
     }
 });

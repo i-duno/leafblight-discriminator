@@ -63,18 +63,3 @@ button {
     font-size: 1.2rem;
     color: #333;
 }
-
-#suggestion-link {
-    display: none; /* Initially hidden */
-    margin-top: 10px;
-    text-decoration: none;
-    color: rgb(19, 136, 4);
-    font-weight: bold;
-    font-size: 1.1em;
-    animation: blink 1s linear infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
