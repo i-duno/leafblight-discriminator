@@ -1,0 +1,3 @@
+# dont need these on heroku
+training/models
+training/train-data
