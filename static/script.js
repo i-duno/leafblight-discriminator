@@ -14,7 +14,8 @@ form.addEventListener('submit', async (event) => {
     }
 
     // Display the uploaded image
-    const reader = new FileReader();
+    const reader = new FileReader()
+
     reader.onload = (e) => {
         uploadedImage.src = e.target.result;
     };
@@ -24,7 +25,7 @@ form.addEventListener('submit', async (event) => {
     formData.append("file", file);
 
     try {
-        const response = await fetch('http://localhost:8000/predict', {
+        const response = await fetch('/predict', {
             method: 'POST',
             body: formData
         });
