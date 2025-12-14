@@ -13,6 +13,32 @@ form.addEventListener('submit', async (event) => {
         return;
     }
 
+    // lol heroku is slow didnt know what to expect anywho
+    let dot_len = 0;
+    let wait_text = "Classifying image"
+    let wait_text_stack = ['So close yet so far', 'Almost there', 'Hold on a bit', 'Please wait']
+    wait_id = setInterval(() => {
+        switch (dot_len) {
+            case 0:
+                predictionElement.textContent = wait_text + '.'
+                break;
+            case 1:
+                predictionElement.textContent = wait_text + '..'
+                break;
+            case 2:
+                predictionElement.textContent = wait_text + '...'
+                break;
+        }
+        dot_len++;
+        if (dot_len >= 3) {
+            dot_len = 0;
+        }
+    }, 350);
+    long_time_id = setInterval(() => {
+        if (wait_text_stack.length === 0) {return}
+        wait_text = wait_text_stack.pop()
+    }, 5000);
+
     // Display the uploaded image
     const reader = new FileReader()
 
@@ -30,6 +56,9 @@ form.addEventListener('submit', async (event) => {
             body: formData
         });
 
+        clearInterval(wait_id)
+        clearInterval(long_time_id)
+
         if (response.ok) {
             const result = await response.json();
             console.log(result)
@@ -38,6 +67,10 @@ form.addEventListener('submit', async (event) => {
             predictionElement.textContent = "Error: Unable to get prediction.";
         }
     } catch (error) {
+
+        clearInterval(wait_id)
+        clearInterval(long_time_id)
+        
         predictionElement.textContent = `Error: ${error.message}`;
     }
 });
