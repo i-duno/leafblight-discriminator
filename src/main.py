@@ -52,7 +52,7 @@ async def ping():
     return "Ah, ah, ah, ah staying alive, staying alive."
 
 def read_file_as_image(data) -> np.ndarray:
-    image = Image.open(BytesIO(data))
+    image = Image.open(BytesIO(data)).convert("RGB") #force 3 channels
     image = image.resize(IMAGE_SIZE)
     return np.array(image)
 
