@@ -27,5 +27,4 @@ This project is currently hosted on [a heroku eco dyno](https://bacterial-leaf-b
 # current model results:
 
 
-===
 [^1]: kudos to university email
