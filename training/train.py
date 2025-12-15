@@ -1,11 +1,11 @@
-import os
-import numpy as np
 import keras
 from tensorflow import data as tf_data
-import matplotlib.pyplot as plt
 
 from keras import layers
 import keras
+
+import sys
+import json
 
 # I dont think this is what we're supposed to do but here we are
 # generate dataset
@@ -107,7 +107,9 @@ def make_model(input_shape, num_classes):
 model = make_model(input_shape=image_size + (3,), num_classes=6)
 keras.utils.plot_model(model, show_shapes=True)
 
-epochs = 25
+epochs = 30
+if len(sys.argv) > 1:
+    epochs = int(sys.argv[1])
 
 callbacks = [
     keras.callbacks.ModelCheckpoint("save_at_{epoch}.keras")
@@ -132,34 +134,6 @@ history = model.fit(
 model.save("final_model.keras")
 print("Done training!")
 
-# Extract values
-train_acc = history.history["accuracy"]
-val_acc = history.history["val_accuracy"]
-train_loss = history.history["loss"]
-val_loss = history.history["val_loss"]
-
-epochs = range(1, len(train_acc) + 1)
-
-# ----- Plot Accuracy -----
-plt.figure(figsize=(8, 5))
-plt.plot(epochs, train_acc, label="Training Accuracy", marker='o')
-plt.plot(epochs, val_acc, label="Validation Accuracy", marker='o')
-plt.title("Training vs Validation Accuracy")
-plt.xlabel("Epochs")
-plt.ylabel("Accuracy")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-
-# ----- Plot Loss -----
-plt.figure(figsize=(8, 5))
-plt.plot(epochs, train_loss, label="Training Loss", marker='o')
-plt.plot(epochs, val_loss, label="Validation Loss", marker='o')
-plt.title("Training vs Validation Loss")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
+# Extract history for future use
+with open("train_history.json", "w") as f:
+    json.dump(history.history, f)

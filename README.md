@@ -1,8 +1,11 @@
 # leafblight-descriminator
-A CNN built with keras to discriminate against the dirty diseased leaves and the healthy ones.
+A CNN built with keras to discriminate against the dirty diseased leaves (yuck) and the healthy ones.
 
 > [!NOTE]
 > This repository is a fork of [this repo](https://github.com/Atharva-Shakargayen/Potato-Leaf-Disease-Detection-using-CNN-/blob/main/imgGen.ipynb), with a new model that is trained on rice leaves instead of potato leaves.
+
+# api usage
+This project is currently hosted on [a heroku eco dyno](https://bacterial-leaf-blight-dad8b70bf174.herokuapp.com)[^1], you can access it through cURL or a get request.
 
 # run instructions
 - Install dependencies first `pip3 install -r requirements.txt`
@@ -10,18 +13,19 @@ A CNN built with keras to discriminate against the dirty diseased leaves and the
 > [!NOTE]
 > Currently the dependencies list `tensorflow-cpu` in substitute for `tensorflow` for hosting reasons.
 
-- Run `python -m uvicorn src.main:app --port=8000 --host=0.0.0.0`
+- Run `python -m uvicorn src.main:app --port=8000 --host=0.0.0.0` or pass your own arguments
 
-# overview
+# train instructions
+- Install additional dependencies `pip3 install -r train-requirements.txt`
 
-(please update using graphs to show fitness)
+- (Optional) Switch out `tensorflow-cpu` with `tensorflow` if you have a gpu that has CUDA
 
-**MODEL FITNESS (v5)**
+- Run `python train.py <epochs (default=30)>`
 
-| train_acc | train_loss | val_acc | val_loss |
-|---|---|---|---|
-| 0.87 | 0.36 | 0.85 | 0.39 |
+- (Optional) Run `python plot.py <train_history.json>` to plot model train history
 
-layers: [32, 64, 128, 256]
+# current model results:
 
-> using the mini Xception framework with reduced layer count
+
+===
+[^1]: kudos to university email

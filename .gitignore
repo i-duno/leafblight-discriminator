@@ -1,3 +1,6 @@
 # ignore the training code, bit too large for github.
-training/models
 training/train-data
+training/*.keras
+training/models/**
+!training/models/12-15-2025-FINAL
+!training/models/12-15-2025-FINAL/**
