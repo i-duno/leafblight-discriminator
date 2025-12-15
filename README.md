@@ -13,6 +13,9 @@ You may ping the API like:
 And you can get predictions like:
 `curl -F "file=@image.jpg" https://bacterial-leaf-blight-dad8b70bf174.herokuapp.com/predict`
 
+> [!NOTE]
+> The model would run better if the image was isolated with a white background, this is because most of the images this model has been trained on had a white background.
+
 # run instructions
 - Install dependencies first `pip3 install -r requirements.txt`
 
