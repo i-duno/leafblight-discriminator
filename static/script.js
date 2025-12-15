@@ -62,6 +62,12 @@ form.addEventListener('submit', async (event) => {
         if (response.ok) {
             const result = await response.json();
             console.log(result)
+
+            if (result.error) {
+                predictionElement.textContent = `API Error: ${result.error}`
+                return;
+            }
+
             predictionElement.textContent = `Prediction: ${result.class}, Confidence: ${result.confidence.toFixed(2)}%`;
         } else {
             predictionElement.textContent = "Error: Unable to get prediction.";
